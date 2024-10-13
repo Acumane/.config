@@ -1,0 +1,14 @@
+"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
+
+[flavor]
+use = ""
+
+[manager]
+cwd = { fg = "reset", bold = true }
+find_keyword  = { fg = "yellow", reversed = true }
+
+border_style  = { fg = "darkgray" }
+
+[input]
+border   = { fg = "darkgray" }
+title    = { fg = "white" }

@@ -1,0 +1,246 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[manager]
+
+keymap = [
+	{ on = "<Esc>", run = [ "escape", "unyank" ] },
+	{ on = "q",     run = "quit" },
+	{ on = "Q",     run = "quit --no-cwd-file" },
+	{ on = "<A-q>", run = "close" },
+
+	# Hopping
+	{ on = "i", run = "arrow -1" },
+	{ on = "k", run = "arrow 1" },
+	{ on = "I", run = "arrow -5" },
+	{ on = "K", run = "arrow 5" },
+
+	{ on = "<Up>",    run = "arrow -1" },
+	{ on = "<Down>",  run = "arrow 1" },
+
+	{ on = "t", run = "arrow -100%" },
+	{ on = "b", run = "arrow 100%" },
+
+	{ on = "T", run = "arrow -99999999" },
+	{ on = "B", run = "arrow 99999999" },
+
+	# Navigation
+	{ on = "j", run = "leave" },
+	{ on = "l", run = "enter" },
+
+	{ on = "<A-Left>",  run = "back" },
+	{ on = "<A-Right>", run = "forward" },
+
+	# Selection
+	{ on = "<Space>", run = [ "select --state=none", "arrow 1" ] },
+	{ on = "v",       run = "visual_mode" },
+	{ on = "V",       run = "visual_mode --unset" },
+	{ on = "<C-a>",   run = "select_all --state=true" },
+	{ on = "<C-i>",   run = "select_all --state=none" },
+
+	# Operation
+	{ on = "o",         run = "open" },
+	{ on = "O",         run = "open --interactive" },
+	{ on = "<Enter>",   run = "open" },
+	{ on = "<S-Enter>", run = "open --interactive" },
+	{ on = "c",         run = "yank" },
+	{ on = "x",         run = "yank --cut" },
+	{ on = "p",         run = "paste" },
+	{ on = "P",         run = "paste --force" },
+	{ on = "-",         run = "link" },
+	{ on = "_",         run = "hardlink" },
+	{ on = "d",         run = "remove" },
+	{ on = "D",         run = "remove --permanently" },
+	{ on = "n",         run = "create" },
+	{ on = "r",         run = "rename --cursor=before_ext" },
+	{ on = "h",         run = "rename --cursor=before_ext" },
+	{ on = "/",         run = "shell --interactive" },
+	{ on = ":",         run = "shell --block --interactive" },
+	{ on = ".",         run = "hidden toggle" },
+
+	# Attributes
+	{ on = [ "a", "s" ], run = "linemode size" },
+	{ on = [ "a", "p" ], run = "linemode permissions" },
+	{ on = [ "a", "c" ], run = "linemode ctime" },
+	{ on = [ "a", "m" ], run = "linemode mtime" },
+	{ on = [ "a", "o" ], run = "linemode owner" },
+	{ on = [ "a", "n" ], run = "linemode none" },
+
+	# Copy
+	{ on = "C", run = "copy path" },
+
+	# Filter
+	{ on = "f", run = "filter --smart" },
+
+	# Sorting
+	{ on = [ "s", "m" ], run = [ "sort modified --reverse=no", "linemode mtime" ] },
+	{ on = [ "s", "M" ], run = [ "sort modified --reverse", "linemode mtime" ] },
+	{ on = [ "s", "c" ], run = [ "sort created --reverse=no", "linemode ctime" ] },
+	{ on = [ "s", "C" ], run = [ "sort created --reverse", "linemode ctime" ] },
+	{ on = [ "s", "e" ], run = "sort extension --reverse=no" },
+	{ on = [ "s", "E" ], run = "sort extension --reverse" },
+	{ on = [ "s", "a" ], run = "sort natural --reverse=no" },
+	{ on = [ "s", "A" ], run = "sort natural --reverse" },
+	{ on = [ "s", "s" ], run = [ "sort size --reverse=no", "linemode size" ] },
+	{ on = [ "s", "S" ], run = [ "sort size --reverse", "linemode size" ] },
+
+	# Go-to
+	{ on = [ "g", "h" ], run = "cd ~" },
+	{ on = [ "g", "c" ], run = "cd ~/.config" },
+	{ on = [ "g", "m" ], run = "cd ~/media" },
+	{ on = [ "g", "i" ], run = "cd ~/img" },
+	{ on = [ "g", "a" ], run = "cd ~/audio" },
+	{ on = [ "g", "f" ], run = "cd ~/docs" },
+	{ on = [ "g", "d" ], run = "cd ~/dl" },
+
+	{ on = "<A-g>", run = "cd --interactive" },
+
+	# Tabs
+	{ on = "<A-n>", run = "tab_create --current" },
+	{ on = "<A-q>", run = "tab_close" },
+
+	{ on = "1", run = "tab_switch 0" },
+	{ on = "2", run = "tab_switch 1" },
+	{ on = "3", run = "tab_switch 2" },
+	{ on = "4", run = "tab_switch 3" },
+	{ on = "5", run = "tab_switch 4" },
+	{ on = "6", run = "tab_switch 5" },
+	{ on = "7", run = "tab_switch 6" },
+	{ on = "8", run = "tab_switch 7" },
+	{ on = "9", run = "tab_switch 8" },
+
+	{ on = "<A-j>", run = "tab_switch -1 --relative" },
+	{ on = "<A-l>", run = "tab_switch 1 --relative" },
+
+	{ on = "<A-S-j>", run = "tab_swap -1" },
+	{ on = "<A-S-l>", run = "tab_swap 1" },
+
+	# Tasks
+	{ on = "~", run = "tasks_show" },
+	{ on = "?", run = "help" },
+]
+
+[tasks]
+
+keymap = [
+	{ on = "<Esc>", run = "close" },
+	{ on = "q",     run = "close" },
+
+	{ on = "i", run = "arrow -1" },
+	{ on = "k", run = "arrow 1" },
+
+	{ on = "<Up>",   run = "arrow -1" },
+	{ on = "<Down>", run = "arrow 1" },
+
+	{ on = "<Enter>", run = "inspect" },
+	{ on = "x",       run = "cancel" },
+
+	{ on = "?", run = "help" },
+]
+
+[select]
+
+keymap = [
+	{ on = "<Esc>",   run = "close" },
+	{ on = "<Enter>", run = "close --submit" },
+
+	{ on = "i", run = "arrow -1" },
+	{ on = "k", run = "arrow 1" },
+
+	{ on = "<Up>",   run = "arrow -1" },
+	{ on = "<Down>", run = "arrow 1" },
+
+	{ on = "?", run = "help" },
+]
+
+[input]
+
+keymap = [
+	{ on = "<C-q>",   run = "close" },
+	{ on = "<Enter>", run = "close --submit" },
+	{ on = "<Esc>",   run = ["move 1", "escape" ] },
+
+	# Mode
+	{ on = "h", run = "insert" },
+	{ on = "H", run = "insert --append" },
+	{ on = "v", run = "visual" },
+	{ on = "V", run = [ "move -999", "visual", "move 999" ] },
+
+	# Character-wise movement
+	{ on = "j",       run = "move -1" },
+	{ on = "l",       run = "move 1" },
+	{ on = "<Left>",  run = "move -1" },
+	{ on = "<Right>", run = "move 1" },
+
+	# Word-wise movement
+	{ on = "W", run = "backward" },
+	{ on = "E", run = "backward --end-of-word" },
+	{ on = "w", run = "forward" },
+	{ on = "e", run = "forward --end-of-word" },
+
+	# Line-wise movement
+	{ on = "J", run = "move -999" },
+	{ on = "L", run = "move 999" },
+
+	# Kill
+	{ on = "S-<Backspace>", run = "kill backward" },
+
+	# Delete
+	{ on = "<Backspace>", run = "backspace" },
+	{ on = "<Delete>",    run = "backspace --under" },
+	{ on = "<C-d>",       run = "backspace --under" },
+
+	# Cut, copy, paste
+	{ on = "d", run = "delete --cut" },
+	{ on = "r", run = "delete --insert" },
+
+	{ on = "x", run = [ "delete --cut", "move 1 --in-operating" ] },
+	{ on = "c", run = "yank" },
+	{ on = "p", run = "paste" },
+
+	# Undo, redo
+	{ on = "<C-u>", run = "undo" },
+	{ on = "<C-r>", run = "redo" },
+
+	{ on = "?", run = "help" },
+]
+
+[confirm]
+keymap = [
+	{ on = "<Esc>",   run = "close" },
+	{ on = "<Enter>", run = "close --submit" },
+
+	{ on = "i", run = "arrow -1" },
+	{ on = "k", run = "arrow 1" },
+
+	{ on = "<Up>",   run = "arrow -1" },
+	{ on = "<Down>", run = "arrow 1" },
+
+	{ on = "?", run = "help" },
+]
+
+[completion]
+
+keymap = [
+	{ on = "<Tab>",   run = "close --submit" },
+	{ on = "<Enter>", run = [ "close --submit", "close_input --submit" ] },
+
+	{ on = "<Up>",   run = "arrow -1" },
+	{ on = "<Down>", run = "arrow 1" },
+
+	{ on = "?", run = "help" },
+]
+
+[help]
+
+keymap = [
+	{ on = "<Esc>", run = "escape" },
+	{ on = "q",     run = "close" },
+
+	{ on = "i", run = "arrow -1" },
+	{ on = "k", run = "arrow 1" },
+
+	{ on = "<Up>",   run = "arrow -1" },
+	{ on = "<Down>", run = "arrow 1" },
+
+	{ on = "f", run = "filter" },
+]
