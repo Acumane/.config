@@ -7,6 +7,7 @@ export DOTS="$HOME/dotfiles"
 export SCRIPTS="$DOTS/scripts"
 export ZDOTDIR="$HOME/.config/zsh"
 export DOTFILES_REPO_PATH="$DOTS"
+export WINEPREFIX="$HOME/games"
 
 export CACHE="$HOME/.cache"
 export CONFIG="$HOME/.config"
