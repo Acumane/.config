@@ -8,7 +8,7 @@ if ! pgrep -x rofi; then
         "run")  rofi -show drun -normal-window -show-icons & w="325";;
         "copy") w="375" && cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "COPY" -theme-str "listview{lines:6;columns:1;} window{width:${w}px;}"\
                 | cliphist decode | wl-copy & w="375";;
-        "emoji") rofimoji --selector-args="-normal-window -kb-move-char-back '' -kb-move-char-forward '' -kb-row-left Left -kb-row-right Right \
+        "emoji") rofimoji --selector-args="-normal-window \
                 -theme-str 'listview{lines:4;columns:6;fixed-columns:true;flow:horizontal;} element-text{font:\"Akkurat 13\";} element{padding:11px;margin:3px;}'"\
                 --hidden-descriptions -s neutral --max-recent 0 -r EMOJI & w="325";;
         "cmd")  zsh -c "$(rofi -normal-window -dmenu -p "CMD" -theme-str 'listview{enabled:false;} entry{font:"JetBrains Mono 10";} window{width:450px;}' &)" & w="450"
