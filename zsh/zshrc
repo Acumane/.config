@@ -43,6 +43,8 @@ bindkey '^[?' where
 bindkey '^[f' opener
 bindkey '^[F' dirs
 bindkey '^[[3;3~' killer
-bindkey '^e' files
+bindkey '^e'  files
+bindkey '^[e' files
+bindkey '^[E' fm
 bindkey '^[v' _v
 bindkey '^[t' t

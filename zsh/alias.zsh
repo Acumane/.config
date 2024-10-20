@@ -106,7 +106,7 @@ dl() {
     *) wget -N -P ~/dl $1
   esac
 }
-alias push="tailscale file cp"
+push() { tailscale file cp "$1:"; }
 alias pull="sudo tailscale file get"
 
 alias pn="pnpm"
@@ -123,16 +123,23 @@ app() {
   esac
 }
 alias copr="sudo dnf copr"
-ver() { dnf list "$1" --installed | grep "$1" | tr -s ' ' | cut -d' ' -f 2; }
+ver() { dnf info "$1" --installed | grep "Ver" | awk '{print $NF}'; }
 activate() { source "$1/bin/activate"; }
 alias open="handlr open"
 alias handle="handlr"
 alias c="code"
-alias fm="ranger"
 alias v="nvim"
+@() {
+case $1 in
+    past) shift; jj obslog "$@";;
+    *) jj "$@";; esac; }
 _v() { nvim 2> /dev/null; }
+fm() { exec &> /dev/null
+  kitty sh -c "yazi"; }
 t() { nvim -c ':terminal' 2> /dev/null; }
 zle -N _v; zle -N t; zle -N fm
+alias h="runghc"
+alias hi="ghci"
 
 alias keys="showkey -a"
 alias f="rg $RG_COLORS -iP"
@@ -148,7 +155,7 @@ alias pd="pwd"
 lc() { awk 'END {print NR, "lines"}' "$@"; }
 wc() { awk '{w += NF} END {print w, "words"}' "$@"; }
 type() { file --mime-type "$1" | awk '{print $NF}'; }
-alias info="eza --icons -AFlOXm -T --level=0 --git --smart-group --time-style=relative"
+alias info="eza --icons -AF -lOXm -T --level=0 --git --smart-group --time-style=relative"
 alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"
 much() { du -h -d 1 $1 2>/dev/null | grep --color=none '[0-9]\+G'; }
 alias i="info"; alias t="type"
