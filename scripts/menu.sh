@@ -1,25 +1,31 @@
-x0=$(hyprctl monitors -j | jq '.[] | select(.focused == true) | .x')
-y=$(hyprctl monitors -j  | jq '.[] | select(.focused == true) | .y + 450')
-c=$(hyprctl monitors -j  | jq ".[] | select(.focused == true) | .width / 2 + $x0")
+#!/bin/bash
 
-if ! pgrep -x rofi; then
-    w=""
-    case $1 in
-        "run")  rofi -show drun -normal-window -show-icons & w="325";;
-        "copy") w="375" && cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "COPY" -theme-str "listview{lines:6;columns:1;} window{width:${w}px;}"\
-                | cliphist decode | wl-copy & w="375";;
-        "emoji") rofimoji --selector-args="-normal-window \
-                -theme-str 'listview{lines:4;columns:6;fixed-columns:true;flow:horizontal;} element-text{font:\"Akkurat 13\";} element{padding:11px;margin:3px;}'"\
-                --hidden-descriptions -s neutral --max-recent 0 -r EMOJI & w="325";;
-        "cmd")  zsh -c "$(rofi -normal-window -dmenu -p "CMD" -theme-str 'listview{enabled:false;} entry{font:"JetBrains Mono 10";} window{width:450px;}' &)" & w="450"
-    esac
-    sleep 0.1s
-    pkill -USR1 waybar # show
-    hyprctl dispatch "movewindowpixel exact $((c - (w/2))) $y,Rofi"
+pgrep -x rofi && exit
 
-    pID=$!
-    wait $pID
-    pkill -USR1 waybar # hide
-else
-    exit
-fi
+y=""
+case $1 in
+    "run")  rofi -show drun -normal-window -show-icons & y="105";;
+    "copy") cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "COPY" \
+            -theme-str "listview{lines:6;columns:1;} window{width:375px;}" \
+            | cliphist decode | wl-copy & y="75";;
+    "emoji") rofimoji --selector-args="-normal-window \
+            -theme-str 'listview{lines:4;columns:6;fixed-columns:true;flow:horizontal;} element-text{font:\"Akkurat 13\";} element{padding:11px;margin:3px;}'" \
+            --hidden-descriptions -s neutral --max-recent 0 -r EMOJI & y="75";;
+    "cmd")  zsh -c "$(rofi -normal-window -dmenu -p "CMD" \
+            -theme-str 'listview{enabled:false;} entry{font:"JetBrains Mono 10";} window{width:450px;}' &)" & y="180"
+esac
+
+while ! hyprctl clients | grep -q "class: Rofi"; do sleep 0.05; done
+
+pkill -USR1 waybar
+hyprctl dispatch "movewindowpixel 0 -${y},Rofi"
+
+{ while pgrep -x rofi > /dev/null; do # kill if focus is lost
+    if [[ $(hyprctl activewindow -j | jq -r .class) != "Rofi" ]]; then
+        pkill rofi; break
+    fi
+    sleep 0.1
+done } &
+
+wait
+pkill -USR1 waybar
