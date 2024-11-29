@@ -68,8 +68,8 @@ ip() {
 
 spin() { cur=$(pwd);
 cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
-alias speed="fast -u --single-line"
-alias clock="darshellclock"
+alias clock="while true; do clear; date '+%b %-d, %-I:%M:%S %p'; sleep 1; done"
+alias weather="curl -s 'wttr.in/?format=%c+%f' | sed 's/+//g'"
 tz() {
   local TZ
   if [ -z "$1" ]
@@ -90,6 +90,7 @@ net() {
       nmcli -s -g 802-11-wireless-security.psk connection show "${2:-$ssid}";;
     speed) fast -u --single-line;;
     type) nmcli -t -f TYPE,STATE device status | grep ":connected$" | head -n 1 | cut -d':' -f1;;
+    scan) nmcli dev wifi rescan && nmcli dev wifi list;;
     *) nmcli dev wifi ${@:1}
   esac
 }
