@@ -27,6 +27,7 @@ alias first="head -n 1"
 alias last="tail -n 1"
 
 alias sys="systemctl"
+alias vigil="vigiland"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias suspend="systemctl suspend"
@@ -59,9 +60,9 @@ alias ports='grc netstat -tulanp'
 alias sockets='grc netstat -xlanp'
 alias mac="ifconfig | grep ether | awk '{print \$2}'"
 ip() {
-  case "$1" in
-    public  | -P) curl "http://ifconfig.me" ;;
-    private | -p) hostname -I ;;
+  case "${(L)1}" in
+    pub|public) curl -s "http://ifconfig.me";;
+    *) command ip -br -c addr | grep -vE "br-|docker";;
   esac
 }
 

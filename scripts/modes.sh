@@ -16,7 +16,9 @@ if [[ "$GAME" = 1 ]]; then
     sed -i '/^# Mouse (main):/,/^$/{/^$/!{/^#/! s/^/# /}}' $KEYD
     sed -i '/^# Disabled (game):/,/^$/{/^$/!{/^#/! s/^/# /}}' $KEYD
     cp $KEYD /etc/keyd/default.conf && keyd reload
-    ratbagctl "G900" profile 0 led 0 set color ff0f00
+    ratbagctl "G900" led 0 set color ff0f00
+    ratbagctl "G900" rate set 1000
+
     hyprctl --batch "\
         keyword animations:enabled 0;\
         keyword decoration:blur:enabled 0"
@@ -32,7 +34,8 @@ elif [[ "$GAME" = 0 ]]; then
     sed -i '/^# Keys (game):/,/^$/{/^$/!{/^#/! s/^/# /}}' $KEYD
     sed -i '/^# Disabled (game):/,/^$/{/^#.*:$/! s/^# //}' $KEYD
     cp $KEYD /etc/keyd/default.conf && keyd reload
-    ratbagctl "G900" profile 0 led 0 set color 6e6482
+    ratbagctl "G900" led 0 set color 6e6482
+    ratbagctl "G900" rate set 250
 
     hyprctl reload
     [[ "$1" == "-k" ]] && notify-send -u low -i - "Keys switched to main mode" && exit
