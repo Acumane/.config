@@ -3,16 +3,6 @@ plugin:
     sendkey_executor:
       device_name: 'keyd virtual keyboard'
 swipe:
-  3:
-    up:
-      command: 'hyprctl dispatch scroller:movefocus d'
-    down:
-      command: 'hyprctl dispatch scroller:movefocus u'
-    left:
-      command: 'hyprctl dispatch scroller:movefocus r'
-    right:
-      command: 'hyprctl dispatch scroller:movefocus l'
-
   4:
     up:
       update:
