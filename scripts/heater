@@ -2,6 +2,6 @@
 exec &> /dev/null
 
 cd ~/.local/share/FurMark
-mpv --loop ~/audio/magma.opus &
+mpv --loop --volume=75 ~/audio/magma.opus &
 ./furmark "$@" --demo furmark-knot-gl --no-osi # tried BOINC!
 trap 'kill $!' EXIT
