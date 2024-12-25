@@ -12,7 +12,7 @@ ext_dpms_off() {
 }
 
 # User-activated (-f): force standby
-if [ "$2" = "-f" ]; then
+if [ "$1" = "-f" ]; then
     swaylock --conf="$DOTS/sway/lock.conf" --grace=0 &
     sleep .5s; brillo -O; brillo -S 0% -u 1000000; blight set 0 & ext_dpms_off
     swayidle -w timeout 1 '' resume "brillo -I -u 100000 && kill \$(pgrep -n swayidle)"

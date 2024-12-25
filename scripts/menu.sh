@@ -20,7 +20,7 @@ esac
 while ! hyprctl clients | grep -q "class: Rofi"; do sleep 0.05; done
 
 pkill -USR1 waybar
-hyprctl dispatch "movewindowpixel exact $((c - (w/2))) $y,Rofi"
+hyprctl dispatch "movewindowpixel exact $((c - (w/2))) $y, class:Rofi"
 
 { while pgrep -x rofi > /dev/null; do # kill if focus is lost
     if [[ $(hyprctl activewindow -j | jq -r .class) != "Rofi" ]]; then
