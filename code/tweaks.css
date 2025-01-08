@@ -1,0 +1,21 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.linux {
+	font-family: Akkurat, sans-serif;
+}
+
+/* Hide "Custom CSS" icon in status bar */
+div#be5invis\.vscode-custom-css {
+	visibility: hidden !important;
+}
+
+/* Remove tab "x" button */
+a.action-label.codicon.codicon-close {
+	display: none !important;
+}
+.tabs-container>.tab>.tab-actions {
+	width: 14px !important;
+}
