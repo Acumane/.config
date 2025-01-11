@@ -6,12 +6,20 @@
 
 /* Icon color fix */
 :root {
-	--gnome-icons-hack-filter: invert(100%) sepia(0.35) hue-rotate(20deg) brightness(1.05) !important;
+	--gnome-icons-hack-filter: invert(1) sepia(35%) brightness(1.05) !important;
 	--gnome-window-color: var(--gnome-toolbar-color) !important; /* revert v121.1 */
+}
+
+.tab-throbber::before {
+	filter: sepia(35%) saturate(500%) !important;
 }
 
 #downloads-button, #downloads-indicator-icon .toolbarbutton-icon {
 	filter: none !important;
+}
+
+.titlebar-buttonbox-container {
+	padding: 0 3px !important;
 }
 
 /* Default window background */
@@ -25,6 +33,18 @@ browser,
 #tabbrowser-arrowscrollbox-periphery, #fxa-toolbar-menu-button,
 #identity-permission-box, #stop-reload-button {
 	display: none !important;
+}
+
+/* Remove tab "x" and gradient */
+.tab-content:not([pinned])::before {
+	visibility: hidden !important;
+}
+tabs#tabbrowser-tabs {
+	&[orient="horizontal"] {
+		& tab { & .tab-content { & .tab-close-button {
+			fill-opacity: 0 !important;
+		}}}
+	}
 }
 
 /* PWA: hide the tabs, titlebar, headers, etc. */
@@ -57,4 +77,8 @@ label#userContext-label { /* Container label */
 }
 hbox.urlbar-addon-page-action {
 	display: none;
+}
+
+#navigator-toolbox {
+	border: 1px solid #32323D !important;
 }
